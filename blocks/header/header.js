@@ -3,6 +3,11 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+function getLanguage(defaultLang = 'en') {
+  const lang = window.location.pathname.split('/')[1];
+  return lang || defaultLang;
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -92,7 +97,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 export default async function decorate(block) {
   // fetch nav content
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
+  const navPath = navMeta ? new URL(navMeta).pathname : `/${getLanguage()}/nav`;
   const resp = await fetch(`${navPath}.plain.html`);
 
   if (resp.ok) {
