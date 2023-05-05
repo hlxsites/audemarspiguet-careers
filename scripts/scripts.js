@@ -12,7 +12,6 @@ import {
   loadBlocks,
   loadCSS,
 } from './lib-franklin.js';
-import { bc } from './video.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
