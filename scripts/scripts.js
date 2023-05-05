@@ -57,28 +57,17 @@ function decorateVideoLinks(element) {
     player.setAttribute('controls', 'true');
     player.setAttribute('poster', 'false');
     const parent = a.parentElement;
-    // check parent node name
-    if (parent.nodeName === 'P') {
-      const pictureSibling = parent.previousElementSibling?.firstElementChild;
-      const grandparent = parent.parentElement;
-      grandparent.removeChild(parent);
-      grandparent.className = 'video-container';
-      if (pictureSibling) {
-        const oldParent = pictureSibling.parentElement;
-        pictureSibling.className = 'video-image';
-        grandparent.appendChild(pictureSibling);
-        oldParent.parentElement.removeChild(oldParent);
-      }
-      grandparent.appendChild(player);
-    } else {
-      const pictureSibling = parent.previousElementSibling;
-      parent.className = 'video-container';
-      if (pictureSibling) {
-        pictureSibling.className = 'video-image';
-      }
-      parent.removeChild(a);
-      parent.appendChild(player);
+    const pictureSibling = parent.previousElementSibling?.firstElementChild;
+    const grandparent = parent.parentElement;
+    grandparent.removeChild(parent);
+    grandparent.className = 'video-container';
+    if (pictureSibling) {
+      const oldParent = pictureSibling.parentElement;
+      pictureSibling.className = 'video-image';
+      grandparent.appendChild(pictureSibling);
+      oldParent.parentElement.removeChild(oldParent);
     }
+    grandparent.appendChild(player);
   });
 }
 
