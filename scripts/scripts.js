@@ -54,8 +54,7 @@ function decorateVideoLinks(element) {
     player.setAttribute('data-video-id', id);
     player.setAttribute('data-account', '1275282095001');
     player.setAttribute('data-player', '9rGCgus7j');
-    player.setAttribute('controls', 'true');
-    player.setAttribute('poster', 'false');
+    player.setAttribute('poster', '');
     const parent = a.parentElement;
     const pictureSibling = parent.previousElementSibling?.firstElementChild;
     const grandparent = parent.parentElement;
