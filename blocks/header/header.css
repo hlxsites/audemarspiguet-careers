@@ -17,6 +17,7 @@ header nav {
   max-width: var(--section-max-width);
   height: var(--nav-height);
   font-family: var(--body-font-family);
+  transition: height 0.5s;
 }
 
 header nav > div:not(.nav-sections) {
@@ -186,20 +187,21 @@ header nav .nav-sections ul > li {
   margin-top: 20px;
 }
 
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 500;
-}
-
 @media (min-width: 900px) {
+  header .nav-wrapper.has-scrolled {
+    box-shadow: rgb(0 0 0 / 10%) 0 7px 14px 0;
+  }
+
+  header .nav-wrapper.has-scrolled nav {
+    --nav-height: 72px;
+  }
+
   header .nav-wrapper {
     position: fixed;
   }
 
   header nav .nav-sections {
+    padding-right: 3rem;
     display: block;
     visibility: visible;
     white-space: nowrap;
@@ -210,12 +212,29 @@ header nav .nav-sections ul > li > ul > li {
     letter-spacing: 0.128rem;
   }
 
+  header nav .nav-brand {
+    position: relative;
+  }
+
   header nav .nav-brand .icon-logo-condensed {
-    display: none;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
   }
 
   header nav .nav-brand .icon-logo-full {
     display: unset;
+    transition: opacity 0.5s;
+    opacity: 100;
+  }
+
+  header .nav-wrapper.has-scrolled nav .nav-brand .icon-logo-condensed {
+    opacity: 100;
+  }
+
+  header .nav-wrapper.has-scrolled nav .nav-brand .icon-logo-full {
+    opacity: 0;
   }
 
   header nav .nav-brand .icon-logo-full svg {
@@ -239,10 +258,15 @@ header nav .nav-sections ul > li > ul > li {
     flex: 0 1 auto;
     position: relative;
     font-weight: 500;
+    margin-top: 0;
   }
 }
 
 @media (min-width: 1178px) {
+  header nav .nav-sections {
+    padding-right: 0;
+  }
+
   header nav > div:not(.nav-sections) {
     padding: 0;
   }

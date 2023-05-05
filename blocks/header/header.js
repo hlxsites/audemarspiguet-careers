@@ -146,5 +146,13 @@ export default async function decorate(block) {
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
     block.append(navWrapper);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80 && !navWrapper.classList.contains('has-scrolled')) {
+        navWrapper.classList.add('has-scrolled');
+      } else if (window.scrollY <= 80 && navWrapper.classList.contains('has-scrolled')) {
+        navWrapper.classList.remove('has-scrolled');
+      }
+    });
   }
 }
