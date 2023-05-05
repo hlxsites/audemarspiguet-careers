@@ -38,19 +38,20 @@
   color: black;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  padding: 2.5rem;
 }
 
 .table table th, .table table td {
-  padding: 15px;
+  padding: 25px;
   text-align: left;
+  letter-spacing: 0.048rem;
+  line-height: 2.8rem;
 }
 
 .table table td {
   font-size: 1.4rem;
   color: #888f8f;
-  line-height: 2.3rem;
-  letter-spacing: 0.048rem;
 }
 
 /* striped variant */
