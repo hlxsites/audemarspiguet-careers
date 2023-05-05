@@ -6,6 +6,7 @@ export default function decorate(block) {
   const text = block.querySelectorAll('p:not([class*="button-container"])');
   const link = block.querySelector('p[class*="button-container"]');
   link.classList.remove('button-container');
+  link.querySelector('a').classList.remove('button');
 
   // If block config includes "with-form", add search form
   const searchForm = document.createElement('form');
