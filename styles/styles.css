@@ -265,18 +265,27 @@ main .section.highlight {
 
 .video-js {
   position: absolute;
-  top: calc(50% - 174px);
+  top: calc(50% - 74px);
   left: 0;
   width: 100%;
-  height: 348px;
+  height: 148px;
   background-color: transparent;
   z-index: 1;
 }
 
+.video-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
 @media (min-width: 900px) {
+  .video-js {
+    top: calc(50% - 174px);
+    height: 348px;
+  }
+
   .video-container {
-    position: relative;
     width: 50%;
-    height: auto;
   }
 }
