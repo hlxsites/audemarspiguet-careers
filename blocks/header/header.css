@@ -20,6 +20,11 @@ header nav {
   transition: height 0.5s;
 }
 
+header nav.alternate {
+  display: flex;
+  justify-content: center;
+}
+
 header nav > div:not(.nav-sections) {
   padding: 0 1rem;
 }
@@ -57,6 +62,10 @@ header nav .nav-hamburger {
   height: 22px;
   display: flex;
   align-items: center;
+}
+
+header nav.alternate .nav-hamburger {
+  display: none;
 }
 
 header nav .nav-hamburger button {
@@ -142,6 +151,20 @@ header .nav-brand {
   line-height: 1;
 }
 
+header nav.alternate .nav-brand {
+  flex-basis: 0;
+}
+
+header nav.alternate .nav-brand svg {
+  fill: black;
+  stroke: black;
+}
+
+header nav.alternate .nav-brand > p:not(:first-child) {
+  display: flex;
+  justify-content: center;
+}
+
 header nav .nav-brand img {
   width: 128px;
   height: auto;
@@ -155,6 +178,8 @@ header nav .nav-brand .icon-logo-condensed {
 }
 
 header nav .nav-brand .icon-logo-full {
+  stroke: #988057;
+  fill: #988057;
   display: none;
 }
 

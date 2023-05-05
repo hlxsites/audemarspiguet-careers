@@ -90,5 +90,10 @@ export default async function decorate(block) {
         navWrapper.classList.remove('has-scrolled');
       }
     });
+
+    // styles for alternate header
+    if (!document.querySelector('nav .nav-sections')) {
+      nav.classList.add('alternate');
+    }
   }
 }
