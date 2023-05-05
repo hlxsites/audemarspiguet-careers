@@ -38,9 +38,11 @@
   --heading-font-size-s: 1.8rem;
   --heading-font-size-xs: 1.6rem;
 
-  /* nav height */
-  --nav-height: 64px;
+   /* constants */
+   --section-max-width: 1136px;
 
+  /* nav height */
+  --nav-height: 56px;
 }
 
 @media (min-width: 900px) {
@@ -236,8 +238,12 @@ main .section {
 }
 
 @media (min-width: 900px) {
+  :root {
+    --nav-height: 88px;
+  }
+
   .section > div {
-    max-width: 1136px;
+    max-width: var(--section-max-width);
     margin: auto;
   }
 }
