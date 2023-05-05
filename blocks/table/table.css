@@ -1,0 +1,65 @@
+.table {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  padding: 2rem;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+}
+
+.table table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: var(--body-font-size-xs);
+}
+
+@media (min-width: 600px) {
+  .table table {
+    font-size: var(--body-font-size-s);
+  }
+}
+
+@media (min-width: 900px) {
+  .table table {
+    font-size: var(--body-font-size-m);
+  }
+}
+
+.table table thead tr {
+  border-bottom: 1px solid #c5c7c7;
+}
+
+.table table tbody tr:not(:last-child) {
+  border-bottom: 1px solid #c5c7c7;
+}
+
+.table table th {
+  color: black;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.6rem;
+  padding: 2.5rem;
+}
+
+.table table th, .table table td {
+  padding: 25px;
+  text-align: left;
+  letter-spacing: 0.048rem;
+  line-height: 2.8rem;
+}
+
+.table table td {
+  font-size: 1.4rem;
+  color: #888f8f;
+}
+
+/* striped variant */
+.table.striped tbody tr:nth-child(odd) {
+  background-color: var(--overlay-background-color);
+}
+
+/* bordered variant */
+.table.bordered table th, .table.bordered table td {
+  border: 1px solid;
+}
