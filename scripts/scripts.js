@@ -12,6 +12,7 @@ import {
   loadBlocks,
   loadCSS,
 } from './lib-franklin.js';
+import { bc } from './video.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
@@ -44,11 +45,63 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Decorate video links
+ */
+function decorateVideoLinks(element) {
+  element.querySelectorAll('a[href^="https://www.brightcove.com/"]').forEach((a) => {
+    const id = a.href.substring(27);
+    const parent = a.parentElement;
+    const pictureSibling = parent.previousElementSibling?.firstElementChild;
+    const grandparent = parent.parentElement;
+    grandparent.removeChild(parent);
+    const container = document.createElement('div');
+    container.className = 'video-container';
+    const player = document.createElement('video');
+    player.className = 'video-js';
+    player.setAttribute('data-video-id', id);
+    player.setAttribute('data-account', '1275282095001');
+    player.setAttribute('data-player', '9rGCgus7j');
+    player.setAttribute('controls', 'true');
+    player.setAttribute('poster', 'false');
+    if (pictureSibling) {
+      const oldParent = pictureSibling.parentElement;
+      pictureSibling.className = 'video-image';
+      container.appendChild(pictureSibling);
+      oldParent.parentElement.removeChild(oldParent);
+    }
+    container.appendChild(player);
+    grandparent.appendChild(container);
+  });
+}
+
+export function linkPicture(picture) {
+  const nextSib = picture.parentNode.nextElementSibling;
+  if (nextSib) {
+    const a = nextSib.querySelector('a');
+    if (a && a.textContent.startsWith('https://')) {
+      a.innerHTML = '';
+      a.className = '';
+      a.appendChild(picture);
+    }
+  }
+}
+
+export function decorateLinkedPictures(main) {
+  /* thanks to word online */
+  main.querySelectorAll('picture').forEach((picture) => {
+    if (!picture.closest('div.block')) {
+      linkPicture(picture);
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  decorateVideoLinks(main);
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
@@ -111,6 +164,18 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
+export function loadScript(url, callback, type) {
+  const head = document.querySelector('head');
+  const script = document.createElement('script');
+  script.src = url;
+  if (type) {
+    script.setAttribute('type', type);
+  }
+  head.append(script);
+  script.onload = callback;
+  return script;
+}
+
 /**
  * Loads everything that happens a lot later,
  * without impacting the user experience.
@@ -119,6 +184,12 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
+  loadCSS('/styles/video.css');
+  loadScript('/scripts/video.js', () => {
+    document.querySelectorAll('video').forEach((v) => {
+      bc(v);
+    });
+  });
 }
 
 async function loadPage() {
