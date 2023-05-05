@@ -97,10 +97,14 @@ export function loadCSS(href, callback) {
   }
 }
 
-export function loadScript(url, callback, type) {
+/**
+ * Loads a javascript file.
+ * @param {string} href The path to the javascript file
+ */
+export function loadScript(href, callback, type) {
   const head = document.querySelector('head');
   const script = document.createElement('script');
-  script.src = url;
+  script.src = href;
   if (type) {
     script.setAttribute('type', type);
   }
