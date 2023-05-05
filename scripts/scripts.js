@@ -186,6 +186,7 @@ function loadDelayed() {
   loadCSS('/styles/video.css');
   loadScript('/scripts/video.js', () => {
     document.querySelectorAll('video').forEach((v) => {
+      // eslint-disable-next-line no-undef
       bc(v);
     });
   });
