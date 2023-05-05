@@ -157,7 +157,6 @@ header nav.alternate .nav-brand {
 
 header nav.alternate .nav-brand svg {
   fill: black;
-  stroke: black;
 }
 
 header nav.alternate .nav-brand > p:not(:first-child) {
@@ -171,15 +170,13 @@ header nav .nav-brand img {
 }
 
 header nav .nav-brand .icon-logo-condensed {
-  stroke: #988057;
   fill: #988057;
   width: 30px;
   height: 30px;
 }
 
 header nav .nav-brand .icon-logo-full {
-  stroke: #988057;
-  fill: #988057;
+  fill: #ab9257;
   display: none;
 }
 
