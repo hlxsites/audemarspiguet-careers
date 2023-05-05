@@ -163,18 +163,6 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
-export function loadScript(url, callback, type) {
-  const head = document.querySelector('head');
-  const script = document.createElement('script');
-  script.src = url;
-  if (type) {
-    script.setAttribute('type', type);
-  }
-  head.append(script);
-  script.onload = callback;
-  return script;
-}
-
 /**
  * Loads everything that happens a lot later,
  * without impacting the user experience.
@@ -183,13 +171,6 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
-  loadCSS('/styles/video.css');
-  loadScript('/scripts/video.js', () => {
-    document.querySelectorAll('video').forEach((v) => {
-      // eslint-disable-next-line no-undef
-      bc(v);
-    });
-  });
 }
 
 async function loadPage() {

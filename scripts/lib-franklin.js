@@ -97,6 +97,18 @@ export function loadCSS(href, callback) {
   }
 }
 
+export function loadScript(url, callback, type) {
+  const head = document.querySelector('head');
+  const script = document.createElement('script');
+  script.src = url;
+  if (type) {
+    script.setAttribute('type', type);
+  }
+  head.append(script);
+  script.onload = callback;
+  return script;
+}
+
 /**
  * Retrieves the content of metadata tags.
  * @param {string} name The metadata name (or property)
