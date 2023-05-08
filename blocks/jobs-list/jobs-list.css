@@ -1,3 +1,161 @@
+/* filter styling */
+.jobs-list .filters {
+  position: fixed;
+  z-index: 99;
+  top: 10vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20px;
+  transition: top 0.2s;
+}
+
+.jobs-list .filters[aria-hidden='true'] {
+  top: 100vh;
+}
+
 .jobs-list .filter-dropdown div[aria-hidden='true'] {
   display: none;
+}
+
+.jobs-list button[name='filters close'] {
+  background: none;
+  color: gray;
+  margin: 0 0 0 auto;
+  padding-right: 0;
+}
+
+.jobs-list .filter-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jobs-list .filter-body {
+  overflow: scroll;
+}
+
+.jobs-list .filter-body > div {
+  border-bottom: 1px solid #D2D2D4;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.jobs-list .filter-body > div button {
+  margin: 0;
+  background: none;
+  color: var(--link-color);
+  font-size: 1.5rem;
+  font-weight: 300;
+  padding-left: 0;
+  border-radius: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.jobs-list .filter-body > div button .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.jobs-list .filter-body > div .filter-name {
+  color: #7B8282;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.jobs-list button[name='filters toggle'] {
+  background: none;
+  border-radius: 0;
+  border: 1px solid #D2D2D4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.jobs-list button[name='filters toggle'], .jobs-list .filter-head {
+  font-weight: 600;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 3.8rem;
+  color: #7B8282;
+  text-transform: uppercase;
+  letter-spacing: 0.128rem;
+}
+
+.jobs-list .filter-head .icon, .jobs-list button[name='filters toggle'] .icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+}
+
+.jobs-list button[name='filters close'] .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.jobs-list button[name='filters toggle'] > .num-selected {
+  color: rgb(210 210 212);
+}
+
+/* dropdowns */
+.jobs-list .filter-dropdown {
+  display: grid;
+  grid-template-rows: auto 0fr;
+  transition: grid-template-rows 0.2s;
+}
+
+.jobs-list .filter-dropdown .icon {
+  transition: transform 0.2s;
+}
+
+.jobs-list .filter-dropdown[data-expanded] .icon {
+  transform: rotate(180deg);
+}
+
+.jobs-list .filter-dropdown[data-expanded] {
+  grid-template-rows: auto 1fr;
+}
+
+.jobs-list .filter-dropdown .filter-dropdown-values {
+  overflow: hidden;
+}
+
+.jobs-list .filter-dropdown .filter-dropdown-values > div {
+  display: grid;
+  grid-template: 'check text' / auto 1fr;
+  gap: 10px;
+}
+
+/* table styling */
+.jobs-list table {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.jobs-list thead {
+  display: none;
+}
+
+.jobs-list tbody tr {
+  display: grid;
+  grid-template: 'title title' 'location date' / 1fr 1fr;
+  width: 100%;
+  color: #7B8282;
+  font-size: 1.5rem;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #D2D2D4;
+}
+
+.jobs-list tbody tr > td:first-child {
+  grid-area: title;
+  color: rgb(73 82 82);
+  font-size: 2rem;
 }
