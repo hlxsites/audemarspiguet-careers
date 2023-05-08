@@ -33,7 +33,7 @@
 }
 
 .jobs-list .filter-body {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .jobs-list .filter-body > div {
@@ -158,4 +158,79 @@
   grid-area: title;
   color: rgb(73 82 82);
   font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  /* table */
+  .jobs-list {
+    display: flex;
+  }
+
+  .jobs-list thead {
+    display: block;
+    border-bottom: 1px solid #D2D2D4;
+    width: 100%;
+    font-weight: 600;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 3.8rem;
+    color: #7B8282;
+    text-transform: uppercase;
+    letter-spacing: 0.128rem;
+    height: 38px;
+  }
+
+  .jobs-list table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  .jobs-list table tbody {
+    display: block;
+  }
+
+  .jobs-list table tr {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
+    text-align: left;
+    margin-left: 40px;
+    width: calc(100% - 40px);
+    font-size: 1.2rem;
+    color: rgb(123 130 130);
+    font-weight: 200;
+  }
+
+  .jobs-list tbody tr > td:first-child {
+    grid-area: unset;
+    font-weight: 300;
+    font-size: 1.6rem;
+  }
+
+  /* filters */
+
+  .jobs-list .filters {
+    position: unset;
+    min-width: 280px;
+    padding: 0;
+  }
+
+  .jobs-list .filter-body {
+    overflow-y: unset;
+    padding-right: 40px;
+    border-right: 1px solid #D2D2D4;
+  }
+
+  .jobs-list .filter-head {
+    border-bottom: 1px solid #D2D2D4;
+  }
+
+  .jobs-list button[name='filters toggle'] {
+    display: none;
+  }
+
+  .jobs-list button[name='filters close'] {
+    display: none;
+  }
 }
