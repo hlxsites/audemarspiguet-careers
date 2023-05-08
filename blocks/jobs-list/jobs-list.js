@@ -86,7 +86,11 @@ export default function decorate(block) {
               <div aria-hidden="true" id="filter-${i}" class="filter-dropdown-values">
                 ${filter.values.map((value) => `
                   <div>
-                    <input id="check-${filter.name}-${value}" type="checkbox" />
+                    <input 
+                      id="check-${filter.name}-${value}" 
+                      data-filter-name="${filter.name}" 
+                      data-filter-value="${value}" 
+                      type="checkbox" />
                     <label for="check-${filter.name}-${value}" ${value}>${value}</label>
                   </div>
                 `).join('')}
@@ -116,10 +120,12 @@ export default function decorate(block) {
     </table>
   `;
 
+  /* Close the filters tab on mobile */
   block.querySelector('button[name="filters close"]').addEventListener('click', () => {
     block.querySelector('#filters-tab').setAttribute('aria-hidden', true);
   });
 
+  /* Open/toggle the filters tab on mobile */
   block.querySelector('button[name="filters toggle"]').addEventListener('click', () => {
     const filtersTab = block.querySelector('#filters-tab');
     if (filtersTab.getAttribute('aria-hidden') === 'true') {
@@ -129,6 +135,7 @@ export default function decorate(block) {
     }
   });
 
+  /* Toggle a single filter category dropdown */
   [...block.querySelectorAll('.filter-dropdown > button')].forEach((button) => {
     button.addEventListener('click', () => {
       const dropdownTab = block.querySelector(`#${button.getAttribute('aria-controls')}`);
@@ -139,6 +146,33 @@ export default function decorate(block) {
         dropdownTab.setAttribute('aria-hidden', true);
         dropdownTab.closest('.filter-dropdown').removeAttribute('data-expanded');
       }
+    });
+  });
+
+  /* Set query parameters from checkboxes */
+  [...block.querySelectorAll('input')].forEach((input) => {
+    input.addEventListener('change', (e) => {
+      const isChecked = e.currentTarget.checked;
+
+      const currentParams = new URL(window.location).searchParams;
+      const filterName = input.getAttribute('data-filter-name');
+      const filterValue = input.getAttribute('data-filter-value');
+      const currentValuesForFilter = currentParams.get(filterName) || '[]';
+      const valuesForFilter = isChecked
+        ? [...JSON.parse(currentValuesForFilter), filterValue]
+        : [JSON.parse(currentValuesForFilter).filter((v) => v !== filterValue)];
+      currentParams.set(filterName, JSON.stringify(valuesForFilter));
+      window.location = `${window.location.pathname}?${currentParams.toString()}`;
+    });
+  });
+
+  /* Set checkboxes from query parameters */
+  const searchKeys = new URL(window.location.href).searchParams.entries();
+  [...searchKeys].forEach(([key, values]) => {
+    const filterValues = JSON.parse(values);
+    filterValues.forEach((value) => {
+      const checkbox = document.querySelector(`input[data-filter-name='${key}'][data-filter-value='${value}']`);
+      checkbox.checked = true;
     });
   });
 
