@@ -339,11 +339,15 @@ main .section.highlight {
 }
 
 #language-selector input[type="radio"] {
-  visibility:hidden;
+  display: none;
 }
 
 #language-selector label {
   cursor: pointer;
+}
+
+#language-selector label:hover {
+  color: var(--link-color);
 }
 
 #language-selector form {
