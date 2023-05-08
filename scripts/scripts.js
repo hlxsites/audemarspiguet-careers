@@ -139,6 +139,67 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
+export async function showLanguageSelector() {
+  let selector = document.getElementById('language-selector');
+  if (!selector) {
+    selector = document.createElement('div');
+    selector.id = 'language-selector';
+    const resp = await fetch('/languages.json');
+    if (resp.ok) {
+      const head = document.querySelector('head');
+      const script = document.createElement('script');
+      script.innerHTML = `
+        function markLanguage(title, submit) {
+          document.getElementById('language-title').innerText = title.toUpperCase();
+          document.getElementById('language-submit').innerText = submit.toUpperCase();
+        }
+        function selectLanguage() {
+          const selected = document.querySelector('input[name="language"]:checked');
+          const paths = window.location.pathname.split('/');
+          paths[1] = selected.value.substring(1);
+          window.location.pathname = paths.join('/');
+          return false;
+        }
+      `;
+      head.append(script);
+
+      const obj = await resp.json();
+      const currentPrefix = `/${window.location.pathname.split('/')[1]}`;
+      let title = 'Choose your language';
+      let submit = 'Submit';
+      const buttons = obj.data.map((lang) => {
+        const selected = lang.Prefix === currentPrefix;
+        const id = `lang_${lang.Prefix.substring(1)}`;
+        if (selected) {
+          title = lang.Title;
+          submit = lang.Submit;
+        }
+        return `<li>
+          <input type="radio" name="language" onclick="markLanguage('${lang.Title}', '${lang.Submit}')"
+            value="${lang.Prefix}" id="${id}" ${selected ? 'checked' : ''}/>
+          <label for="${id}">${lang.Language.toUpperCase()}</label>
+            </li>`;
+      }).join('');
+      selector.innerHTML = `
+        <h2 id="language-title">${title.toUpperCase()}</h2>
+        <script>
+          function selectLanguage(title, submit) {
+            document.getElementById('language-title').innerText = title;
+            document.getElementById('language-submit').innerText = submit;
+          }
+        </script>
+        <form action="" onsubmit="return selectLanguage()">
+        <ul>
+        ${buttons}
+        </ul>
+        <button id="language-submit" type="submit">${submit.toUpperCase()}</button>
+        </form>
+      `;
+      document.body.appendChild(selector);
+    }
+  }
+}
+
 /**
  * Loads everything that happens a lot later,
  * without impacting the user experience.

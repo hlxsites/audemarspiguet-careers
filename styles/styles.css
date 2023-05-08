@@ -20,6 +20,8 @@
   --text-color: #7B8282;
   --heading-color: #495252;
   --video-button-color: #988057;
+  --form-title-color: #000;
+
 
   /* fonts */
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
@@ -288,4 +290,80 @@ main .section.highlight {
   .video-container {
     width: 50%;
   }
+}
+
+#language-selector {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66.7%;
+  padding: 80px 80px 0;
+  z-index: 5;
+  background-color: var(--background-color);
+}
+
+#language-selector h2, #language-selector label, #language-selector button {
+  font-weight: bold;
+}
+
+#language-selector h2 {
+  color: var(--form-title-color);
+  font-size: 16px;
+}
+
+#language-selector label, #language-selector button {
+  font-size: 13px;
+}
+
+#language-selector ul {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px 50px;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+#language-selector li {
+  width: 30%;
+  text-align: left;
+}
+
+@media (min-width: 900px) {
+  #language-selector li {
+    width: 20%;
+  }
+}
+
+#language-selector input[type="radio"] {
+  visibility:hidden;
+}
+
+#language-selector label {
+  cursor: pointer;
+}
+
+#language-selector form {
+  text-align: center;
+}
+
+#language-selector input:checked + label {
+  color: var(--link-color);
+  border: 1px solid var(--link-color);
+}
+
+#language-selector button {
+  border: 1px solid var(--link-color);
+  background-color: var(--background-color);
+  color: var(--link-color);
+  padding: 20px;
+  border-radius: 0;
+}
+
+#language-selector button:hover {
+  background-color: var(--link-color);
+  color: var(--background-color);
 }
