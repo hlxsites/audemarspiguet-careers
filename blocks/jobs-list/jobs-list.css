@@ -1,0 +1,3 @@
+.jobs-list .filter-dropdown div[aria-hidden='true'] {
+  display: none;
+}
