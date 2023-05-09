@@ -1,2 +1,13 @@
 mountpoints:
   /: https://adobe.sharepoint.com/:f:/r/sites/HelixProjects/Shared%20Documents/sites/audemarspiguet-careers
+
+folders:
+  /en/offer/: /en/offer
+  /zh-hans/offer/: /zh-hans/offer
+  /fr/offer/: /fr/offer
+  /ja/offer/: /ja/offer
+  /es/offer/: /es/offer
+  /it/offer/: /it/offer
+  /ru/offer/: /ru/offer
+  /de/offer/: /de/offer
+  /zh-hant/offer/: /zh-hant/offer
