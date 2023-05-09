@@ -55,11 +55,6 @@
   align-items: center;
 }
 
-.jobs-list .filter-body > div button .icon {
-  width: 18px;
-  height: 18px;
-}
-
 .jobs-list .filter-body > div .filter-name {
   color: #7B8282;
   text-transform: uppercase;
@@ -100,6 +95,11 @@
   height: 24px;
 }
 
+.jobs-list .filter-body > div button .icon {
+  width: 18px;
+  height: 18px;
+}
+
 .jobs-list button[name='filters toggle'] > .num-selected {
   color: rgb(210 210 212);
 }
@@ -111,7 +111,7 @@
   transition: grid-template-rows 0.2s;
 }
 
-.jobs-list .filter-dropdown .icon {
+.jobs-list .filter-dropdown > button span.icon {
   transition: transform 0.2s;
 }
 
