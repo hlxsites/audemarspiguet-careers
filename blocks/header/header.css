@@ -18,15 +18,13 @@ header nav {
   height: var(--nav-height);
   font-family: var(--body-font-family);
   transition: height 0.5s;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 header nav.alternate {
   display: flex;
   justify-content: center;
-}
-
-header nav > div:not(.nav-sections) {
-  padding: 0 1rem;
 }
 
 @media (min-width: 600px) {
@@ -186,7 +184,7 @@ header nav .nav-sections {
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
-  background-color: white;
+  background-color: var(--background-color);
 }
 
 header nav[aria-expanded="true"] .nav-sections {
@@ -210,6 +208,11 @@ header nav .nav-sections ul > li {
 }
 
 @media (min-width: 900px) {
+  header nav {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   header .nav-wrapper.has-scrolled {
     box-shadow: rgb(0 0 0 / 10%) 0 7px 14px 0;
   }
