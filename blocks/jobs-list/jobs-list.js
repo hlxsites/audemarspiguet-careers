@@ -36,6 +36,10 @@ function filterData(data, activeFilters) {
   return filteredData;
 }
 
+function renderFiltersCount(element, activeFilters) {
+  element.innerText = `(${Object.keys(activeFilters).length || 0} selected)`;
+}
+
 function renderTable(parent, data) {
   parent.innerHTML = `
     <thead>
@@ -57,10 +61,12 @@ function renderTable(parent, data) {
   `;
 }
 
-function renderLayout(block, data, filters) {
+function renderLayout(block, data, allFilters, activeFilters) {
   block.innerHTML = `
     <button aria-controls="filters-tab" name="filters toggle">
-      <span class="icon icon-filters"></span>Filters <span class="num-selected">(0 selected)</span>
+      <span class="icon icon-filters"></span>
+      Filters 
+      <span class="num-selected">(${Object.keys(activeFilters).length || 0} selected)</span>
     </button>
     <div aria-hidden="true" class="filters" id="filters-tab">
       
@@ -72,7 +78,7 @@ function renderLayout(block, data, filters) {
         </button>
       </div>
       <div class="filter-body">
-        ${filters.map((filter, i) => `
+        ${allFilters.map((filter, i) => `
           <div>
             <label class="filter-name" for="dropdown-${filter.name}">
               ${filter.name}
@@ -124,7 +130,7 @@ export default function decorate(block) {
     },
   ];
 
-  const filters = [
+  const allFilters = [
     {
       name: 'locations',
       field: 'location',
@@ -168,7 +174,7 @@ export default function decorate(block) {
 
   const activeFilters = getFiltersFromUrl();
 
-  renderLayout(block, filterData(dummyJobs, activeFilters), filters);
+  renderLayout(block, filterData(dummyJobs, activeFilters), allFilters, activeFilters);
 
   /* Close the filters tab on mobile */
   block.querySelector('button[name="filters close"]').addEventListener('click', () => {
@@ -208,7 +214,9 @@ export default function decorate(block) {
       setFilterInUrl(filterName, filterValue, isChecked);
 
       /* re-render table on filter change */
-      renderTable(document.querySelector('table'), filterData(dummyJobs, getFiltersFromUrl()));
+      const newActiveFilters = getFiltersFromUrl();
+      renderTable(document.querySelector('table'), filterData(dummyJobs, newActiveFilters));
+      renderFiltersCount(document.querySelector('.num-selected'), newActiveFilters);
     });
   });
 
