@@ -98,6 +98,22 @@ export function loadCSS(href, callback) {
 }
 
 /**
+ * Loads a javascript file.
+ * @param {string} href The path to the javascript file
+ */
+export function loadScript(href, callback, type) {
+  const head = document.querySelector('head');
+  const script = document.createElement('script');
+  script.src = href;
+  if (type) {
+    script.setAttribute('type', type);
+  }
+  head.append(script);
+  script.onload = callback;
+  return script;
+}
+
+/**
  * Retrieves the content of metadata tags.
  * @param {string} name The metadata name (or property)
  * @returns {string} The metadata value(s)

@@ -44,11 +44,39 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Decorate video links
+ */
+function decorateVideoLinks(element) {
+  element.querySelectorAll('a[href^="https://www.brightcove.com/"]').forEach((a) => {
+    const id = a.href.substring(27);
+    const player = document.createElement('video');
+    player.className = 'video-js';
+    player.setAttribute('data-video-id', id);
+    player.setAttribute('data-account', '1275282095001');
+    player.setAttribute('data-player', '9rGCgus7j');
+    player.setAttribute('poster', '');
+    const parent = a.parentElement;
+    const pictureSibling = parent.previousElementSibling?.firstElementChild;
+    const grandparent = parent.parentElement;
+    grandparent.removeChild(parent);
+    grandparent.className = 'video-container';
+    if (pictureSibling) {
+      const oldParent = pictureSibling.parentElement;
+      pictureSibling.className = 'video-image';
+      grandparent.appendChild(pictureSibling);
+      oldParent.parentElement.removeChild(oldParent);
+    }
+    grandparent.appendChild(player);
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  decorateVideoLinks(main);
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);

@@ -19,6 +19,7 @@
   --highlight-background-color: #ccc;
   --text-color: #7B8282;
   --heading-color: #495252;
+  --video-button-color: #988057;
 
   /* fonts */
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
@@ -251,4 +252,40 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+/** Video section */
+.video-js .vjs-big-play-button, .video-js .vjs-big-play-button:hover, .video-js:hover .vjs-big-play-button {
+  border-color: var(--video-button-color) !important;
+}
+
+.vjs-text-track-display, .vjs-control-bar, .vjs-dock-text, .vjs-poster, .vjs-tech {
+  display: none;
+}
+
+.video-js {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 60%;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 900px) {
+  .video-js {
+    height: 70%;
+  }
+
+  .video-container {
+    width: 50%;
+  }
 }
