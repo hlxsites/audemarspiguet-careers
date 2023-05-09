@@ -1,0 +1,65 @@
+.jobs-detail .sidebar {
+  font-size: 1.35rem;
+  color: #7B8282;
+  font-weight: 300;
+}
+
+.jobs-detail .sidebar span {
+  color: #495252;
+}
+
+.jobs-detail a.apply:any-link {
+  font-size: 1rem;
+  padding: 0 15px;
+  border-radius: 0;
+  margin-top: 30px;
+}
+
+.jobs-detail .sidebar .apply {
+  display: none;
+}
+
+.jobs-detail .sidebar button {
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+.jobs-detail .sidebar svg {
+  fill: #7B8282;
+}
+
+.jobs-detail .sidebar .job-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jobs-detail .sidebar .job-links .share-links {
+  display: flex;
+  overflow-y: hidden;
+  transition: transform 0.2s;
+  transform: scale(100%);
+}
+
+.jobs-detail .sidebar .job-links .share-links[aria-hidden='true'] {
+  transform: scale(0);
+  transform-origin: left;
+}
+
+@media (min-width: 900px) {
+  .jobs-detail {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    gap: 50px;
+  }
+
+  .jobs-detail .sidebar {
+    margin-top: 50px;
+  }
+
+  .jobs-detail .sidebar .apply {
+    display: inline-block;
+  }
+}

@@ -280,6 +280,13 @@ main .section.highlight {
   height: auto;
 }
 
+.capital-wide-letters {
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 3.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.128em;
+}
+
 @media (min-width: 900px) {
   .video-js {
     height: 70%;
