@@ -139,10 +139,10 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
-export async function showLanguageSelector() {
+async function showLanguageSelector() {
   let selector = document.getElementById('language-selector');
   if (!selector) {
-    selector = document.createElement('div');
+    selector = document.createElement('dialog');
     selector.id = 'language-selector';
     const resp = await fetch('/languages.json');
     if (resp.ok) {
@@ -150,8 +150,8 @@ export async function showLanguageSelector() {
       const script = document.createElement('script');
       script.innerHTML = `
         function markLanguage(title, submit) {
-          document.getElementById('language-title').innerText = title.toUpperCase();
-          document.getElementById('language-submit').innerText = submit.toUpperCase();
+          document.getElementById('language-title').innerText = title;
+          document.getElementById('language-submit').innerText = submit;
         }
         function selectLanguage() {
           const selected = document.querySelector('input[name="language"]:checked');
@@ -177,11 +177,10 @@ export async function showLanguageSelector() {
         return `<li>
           <input type="radio" name="language" onclick="markLanguage('${lang.Title}', '${lang.Submit}')"
             value="${lang.Prefix}" id="${id}" ${selected ? 'checked' : ''}/>
-          <label for="${id}">${lang.Language.toUpperCase()}</label>
-            </li>`;
+          <label for="${id}">${lang.Language}</label>
+          </li>`;
       }).join('');
       selector.innerHTML = `
-        <h2 id="language-title">${title.toUpperCase()}</h2>
         <script>
           function selectLanguage(title, submit) {
             document.getElementById('language-title').innerText = title;
@@ -189,13 +188,15 @@ export async function showLanguageSelector() {
           }
         </script>
         <form action="" onsubmit="return selectLanguage()">
+        <fieldset><legend><p id="language-title">${title}</p></legend>
         <ul>
         ${buttons}
         </ul>
-        <button id="language-submit" type="submit">${submit.toUpperCase()}</button>
-        </form>
+        <button id="language-submit" type="submit">${submit}</button>
+        </fieldset></form>
       `;
       document.body.appendChild(selector);
+      selector.showModal();
     }
   }
 }
@@ -208,6 +209,7 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
+  window.setTimeout(() => showLanguageSelector(), 1000);
 }
 
 async function loadPage() {

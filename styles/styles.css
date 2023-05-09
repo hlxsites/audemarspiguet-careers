@@ -293,22 +293,19 @@ main .section.highlight {
 }
 
 #language-selector {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 66.7%;
   padding: 80px 80px 0;
-  z-index: 5;
   background-color: var(--background-color);
+  border: 0;
 }
 
-#language-selector h2, #language-selector label, #language-selector button {
+#language-selector p, #language-selector label, #language-selector button {
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
-#language-selector h2 {
+#language-selector p {
   color: var(--form-title-color);
   font-size: 16px;
 }
@@ -339,11 +336,12 @@ main .section.highlight {
 }
 
 #language-selector input[type="radio"] {
-  display: none;
+  appearance: none;
 }
 
 #language-selector label {
   cursor: pointer;
+  color: var(--text-color);
 }
 
 #language-selector label:hover {
@@ -354,7 +352,7 @@ main .section.highlight {
   text-align: center;
 }
 
-#language-selector input:checked + label {
+#language-selector input:checked + label, #language-selector input:focus + label {
   color: var(--link-color);
   border: 1px solid var(--link-color);
 }
@@ -367,7 +365,21 @@ main .section.highlight {
   border-radius: 0;
 }
 
-#language-selector button:hover {
+#language-selector button:hover, #language-selector button:focus-visible {
   background-color: var(--link-color);
   color: var(--background-color);
+  border: 1px solid var(--link-color);
+}
+
+#language-selector fieldset {
+  border: 0;
+}
+
+#language-selector legend {
+  text-align: left;
+  padding: 0;
+}
+
+#language-selector *:focus-visible {
+  outline: none;
 }
